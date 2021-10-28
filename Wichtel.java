@@ -3,12 +3,12 @@ import java.util.ArrayList;
 
 public class Wichtel {
     String[] namen;
-    int[] reihenfolge;
+    Reihenfolge reihenfolge;
     List<Ausnahme> ausnahmen = new ArrayList<>();
 
     public Wichtel(String[] namen){
         this.namen = namen;
-        reihenfolge = new int[namen.length];
+        reihenfolge = new Reihenfolge(namen.length);
     }
 
     public void addAusnahme(Ausnahme ausnahme){

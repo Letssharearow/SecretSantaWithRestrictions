@@ -1,39 +1,43 @@
+import java.util.List;
+
 public class Reihenfolge {
     int[] reihenfolge;
-
+    RunThroughAll iterator;
 
     public Reihenfolge(int size){
+        this(size, new randomRunThrough());
+    }
+
+    public Reihenfolge(int size, RunThroughAll iterator){
+        this.iterator = iterator;
         reihenfolge = new int[size];   
-        erstelleAlleReihenfolgen();  
     }
 
-    public void erstelleAlleReihenfolgen(){
-        for (int i = 0; i < reihenfolge.length; i++) {
-            reihenfolge[i] = i;
-        }
+    public void erstelleAlleReihenfolgen(List<Ausnahme> ausnahmen){
+        reihenfolge = iterator.getBest(reihenfolge.length, ausnahmen);
     }
 
-    public void switchLast(){
-        int temp = reihenfolge[reihenfolge.length -1];
-        reihenfolge[reihenfolge.length - 1] = reihenfolge[reihenfolge.length -2];
-        reihenfolge[reihenfolge.length -2] = temp;
-    }
+    public static int vergleicheReihenfolge(int[] reihenfolge, Ausnahme ausnahme){
 
-    public void switchI(int i){
-        int temp = reihenfolge[i];
-        reihenfolge[i] = reihenfolge[i-1];
-        reihenfolge[i-1] = temp;
-    }
+        int[] ausnahmeReihenfolge = ausnahme.reihenfolge;
+        int points = 0;
+        int gewichtung = ausnahme.gewichtung;
 
-    public void runThroughAll(){
+        int prevAusnahme = ausnahmeReihenfolge[0];
+        for (int i = 1; i < ausnahmeReihenfolge.length; i++) {        
+            int currentAusnahme = ausnahmeReihenfolge[i];
 
-        for (int i = 1; i <  reihenfolge.length; i++) {
-            System.out.println(printArray(reihenfolge));
-            switchLast();
-            if(i%2 == 0){
-                switchI(reihenfolge.length-2);
+            int prevReihenfolge = reihenfolge[reihenfolge.length -1];
+            for (int j = 0; j < reihenfolge.length; j++) {
+                int currentReihenfolge = reihenfolge[j];
+                if(currentReihenfolge == currentAusnahme && prevReihenfolge == prevAusnahme){
+                    points += gewichtung;
+                }
+                prevReihenfolge = currentReihenfolge;
             }
+            prevAusnahme = currentAusnahme;
         }
+        return points;
     }
 
     public static String printArray(int[] array){
@@ -43,9 +47,16 @@ public class Reihenfolge {
         }
         return result.toString();
     }
+    
+    public static int[] copyArray(int[] toCopy){
+        int[] copy = new int[toCopy.length];
+        for(int i = 0 ; i < copy.length; i++) { 
+            copy[i] = toCopy[i];
+        }
+        return copy;
+    }
 
     public static void main(String[] args) {
         Reihenfolge reihenfolge = new Reihenfolge(5);
-        reihenfolge.runThroughAll();
     }
 }

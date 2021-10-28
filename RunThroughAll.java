@@ -1,6 +1,5 @@
-import java.util.ArrayList;
 import java.util.List;
 
 public interface RunThroughAll {
-    public int[] getBest(int[] reihenfolge, List<Ausnahme> ausnahme);
+    public int[] getBest(int size, List<Ausnahme> ausnahme);
 }
