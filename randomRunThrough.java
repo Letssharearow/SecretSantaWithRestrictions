@@ -24,7 +24,7 @@ public class randomRunThrough implements RunThroughAll{
             vergleichsReihenfolge = getRandom(reihenfolge);
 
             for (Ausnahme ausnahme : ausnahmen) {
-                currentPoints += vergleicheReihenfolge(reihenfolge, ausnahme);
+                currentPoints += vergleicheReihenfolge(vergleichsReihenfolge, ausnahme);
             }
             if(currentPoints < bestPoints){
                 currentBest = copyArray(vergleichsReihenfolge);
