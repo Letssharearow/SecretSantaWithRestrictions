@@ -57,6 +57,6 @@ public class Reihenfolge {
     }
 
     public static void main(String[] args) {
-        Reihenfolge reihenfolge = new Reihenfolge(5);
+        //Reihenfolge reihenfolge = new Reihenfolge(5);
     }
 }

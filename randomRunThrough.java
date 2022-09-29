@@ -27,13 +27,13 @@ public class randomRunThrough implements RunThroughAll{
             if(currentPoints < bestPoints){
                 currentBest = Reihenfolge.copyArray(vergleichsReihenfolge);
                 bestPoints = currentPoints;
-            }                 
+            }          
         }
-        System.out.println(" bestPoints: " + bestPoints );
+        System.out.println(" bestPointsB: " + bestPoints );
         return currentBest;
     }
 
-    public int[] getRandom(int size){
+    public static int[] getRandom(int size){
 
         int[] reihenfolge = new int[size];
         ArrayList<Integer> liste = new ArrayList<>();
